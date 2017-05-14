@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title></title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    	body{
+    		padding: 0px 50px;
+    	}
+    	#template{
+    		display: none;
+    	}
+    </style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>JavaWeb文件上传的九大问题</h1>
+			</div>
+		</div>
+		<div id="template" class="row">
+			<div class="col-lg-12">
+				<div class="file-item">
+					<form method="post" enctype="multipart/form-data">
+						<input type="file" name="upload" class="form-control filestyle" data-buttonText=""/>
+						<div class="progress progress-striped">
+							<div class="progress-bar progress-bar-info active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+								<span style="background-color: transparent;">正在上传，已完成（0%）</span>
+							</div>
+						</div>
+						<div><img style="display: none;height: 400px;"/></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div id="uploads"></div>
+				<p>
+					<a href="javascript:void(0);" class="btn btn-primary upload-btn">开始上传</a>
+					<a href="javascript:void(0);" class="btn btn-success add-btn">+新增项</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/upload.util.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			//页面初始化后，往上传列表中默认添加一个文件选项
+			addUpload();
+			//新增项
+			$(".add-btn").click(function(){
+				addUpload();
+			});
+			//点击开始上传
+			$(".upload-btn").click(function() {
+				$("#uploads .file-item").each(function(){
+					uploadEvent($(this));
+				});
+			});
+		});
+		
+		function addUpload(){
+			var $template=$("#template");
+			var $upload=$("<div class='row'></div>").append($template.html());
+			$("#uploads").append($upload);
+		}
+	</script>
+</body>
+</html>
